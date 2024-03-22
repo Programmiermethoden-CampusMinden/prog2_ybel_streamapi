@@ -1,6 +1,9 @@
 package streamapi;
 
+import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.*;
 
 /** Starter for the stream api task. */
@@ -19,7 +22,7 @@ public class Main {
         // Task III: Random
 
         // Task IV+V: Resources
-
+        System.out.println(resources("file.txt"));
     }
 
     /**
@@ -87,6 +90,30 @@ public class Main {
      */
     public static String resources(String path) {
         // TODO
-        throw new UnsupportedOperationException();
+        StringBuilder result = new StringBuilder();
+
+        try (InputStream stream = getResourceAsStream(path)) {
+            BufferedReader r = new BufferedReader(new InputStreamReader(stream));
+
+            List<String> allLines = new ArrayList<>();
+
+            String newLine = r.readLine();
+            while (newLine != null) {
+                allLines.add(newLine);
+                newLine = r.readLine();
+            }
+
+            for (int i = 1; i < allLines.size(); i++) {
+                String s = allLines.get(i);
+                if (s.startsWith("a") && !(s.length() < 2)) {
+                    result.append(allLines.get(i) + "\n");
+                }
+            }
+
+        } catch (IOException e) {
+            System.err.println("Ouch, that didn't work: \n" + e.getMessage());
+        }
+
+        return result.toString();
     }
 }
