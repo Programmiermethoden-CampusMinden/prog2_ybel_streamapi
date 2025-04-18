@@ -106,7 +106,7 @@ public class Main {
             for (int i = 1; i < allLines.size(); i++) {
                 String s = allLines.get(i);
                 if (s.startsWith("a") && !(s.length() < 2)) {
-                    result.append(allLines.get(i) + "\n");
+                    result.append(allLines.get(i)).append("\n");
                 }
             }
 
