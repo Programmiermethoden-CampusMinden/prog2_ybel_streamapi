@@ -73,8 +73,7 @@ public class Main {
      * @return An open {@link InputStream} for the resource file
      */
     private static InputStream getResourceAsStream(String path) {
-        // TODO
-        throw new UnsupportedOperationException();
+        return Main.class.getResourceAsStream(path);
     }
 
     /**
