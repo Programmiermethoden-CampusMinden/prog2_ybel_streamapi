@@ -73,8 +73,9 @@ public class Main {
      * @return An open {@link InputStream} for the resource file
      */
     private static InputStream getResourceAsStream(String path) {
-        // TODO
-        throw new UnsupportedOperationException();
+        // return File.ReadAllLines(path) maybe?
+        // the resources directory is included by default
+        return Main.class.getResourceAsStream(path);
     }
 
     /**
