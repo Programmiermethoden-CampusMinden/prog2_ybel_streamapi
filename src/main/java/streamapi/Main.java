@@ -2,6 +2,7 @@ package streamapi;
 
 import java.io.InputStream;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /** Starter for the stream api task. */
 public class Main {
@@ -56,8 +57,10 @@ public class Main {
      * @return List of ten random integers (between 0 and 10)
      */
     public static List<Integer> random() {
-        // TODO
-        throw new UnsupportedOperationException();
+        return new Random().ints(0, 10)
+            .limit(10)
+            .boxed()
+            .collect(Collectors.toList());
     }
 
     /**
