@@ -1,10 +1,12 @@
 package streamapi;
 
+import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.*;
-import java.util.stream.Collectors;
 import java.util.Random;
-import java.util.stream.IntStream;
+import java.util.stream.Collectors;
 
 /** Starter for the stream api task. */
 public class Main {
@@ -59,10 +61,7 @@ public class Main {
      * @return List of ten random integers (between 0 and 10)
      */
     public static List<Integer> random() {
-        return new Random().ints(0, 10)
-            .limit(10)
-            .boxed()
-            .collect(Collectors.toList());
+        return new Random().ints(0, 10).limit(10).boxed().collect(Collectors.toList());
     }
 
     /**
@@ -75,8 +74,7 @@ public class Main {
      * @return An open {@link InputStream} for the resource file
      */
     private static InputStream getResourceAsStream(String path) {
-        // TODO
-        throw new UnsupportedOperationException();
+        return Main.class.getClassLoader().getResourceAsStream(path);
     }
 
     /**
@@ -90,7 +88,14 @@ public class Main {
      * @return String of all matching lines, separated by {@code "\n"}
      */
     public static String resources(String path) {
-        // TODO
-        throw new UnsupportedOperationException();
+        try (BufferedReader reader =
+                new BufferedReader(new InputStreamReader(getResourceAsStream(path)))) {
+            return reader.lines()
+                    .filter(line -> line.startsWith("a") && line.length() >= 2)
+                    .collect(Collectors.joining("\n"));
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "";
+        }
     }
 }
