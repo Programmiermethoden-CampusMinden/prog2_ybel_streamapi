@@ -63,10 +63,10 @@ public class Main {
         Random r = new Random();
 
         // TODO
-        List<Integer> randomIntegers = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            randomIntegers.add(r.nextInt(10));
-        }
+        //List<Integer> randomIntegers = new ArrayList<>();
+        //for (int i = 0; i < 10; i++) {
+        //    randomIntegers.add(r.nextInt(10));
+        //}
 
         //List<Integer> returnList = new ArrayList<>();
         //for (int i = 0; i < 10; i++) {
@@ -75,12 +75,11 @@ public class Main {
         //    }
         //}
 
-        return randomIntegers.stream()
+        return r.ints(9,0,9)
             .filter(s->s%2==0)
             .map(s->s*s)
+            .boxed()
             .collect(Collectors.toList());
-
-
 
         //return returnList;
     }
