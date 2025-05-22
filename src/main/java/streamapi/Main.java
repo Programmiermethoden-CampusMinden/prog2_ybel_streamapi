@@ -2,6 +2,7 @@ package streamapi;
 
 import java.io.InputStream;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /** Starter for the stream api task. */
 public class Main {
