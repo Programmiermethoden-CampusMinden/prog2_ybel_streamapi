@@ -57,22 +57,9 @@ public class Main {
      * @return List of ten random integers (between 0 and 10)
      */
     public static List<Integer> random() {
-        Random r = new Random();
-
-        // TODO
-        List<Integer> randomIntegers = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            randomIntegers.add(r.nextInt(10));
-        }
-
-        List<Integer> returnList = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            if (randomIntegers.get(i) % 2 == 0) {
-                returnList.add(randomIntegers.get(i) * randomIntegers.get(i));
-            }
-        }
-
-        return returnList;
+        List<Integer> randomInteger = new ArrayList<>();
+        Collections.addAll(randomInteger, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+        return randomInteger.stream().map(d -> new Random().nextInt(10)).filter(d -> d % 2 == 0).map(d -> (int) Math.pow(d, 2)).toList();
     }
 
     /**
