@@ -2,6 +2,7 @@ package streamapi;
 
 import java.io.InputStream;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /** Starter for the stream api task. */
 public class Main {
@@ -52,17 +53,19 @@ public class Main {
      * @return Set of credit points of all IFM students
      */
     public static Set<Integer> ifmCps(List<Student> studentList) {
-        // TODO
-        Set<Integer> result = new HashSet<>();
-        Integer i = 0;
-        for (Student v : studentList) {
-            if (v.isIFM()) {
-                i = v.cps();
-                result.add(i);
-            }
-        }
-
-        return result;
+        // return set of unique credit point values over list of students:
+        // '.stream()'               -> create 'Stream' from 'List'
+        // '.filter(Student::isIFM)' -> filter to only get students enrolled in Computer Science
+        // '.map(Student::cps)'      -> turn each 'Student' into 'int' with referenced
+        //                              method 'Student.cps()' - returning credit points (as int)
+        // '.collect(Collectors.toCollection(HashSet::new))'
+        //                           -> create new 'HashSet' from all (unique) values of the 'Stream' via
+        //                              'Collectors.toCollection()' with referenced constructor 'HashSet::new'
+        return studentList
+            .stream()
+            .filter(Student::isIFM)
+            .map(Student::cps)
+            .collect(Collectors.toCollection(HashSet::new));
     }
 
     /**
