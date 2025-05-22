@@ -52,18 +52,16 @@ public class Main {
      * @return Set of credit points of all IFM students
      */
     public static Set<Integer> ifmCps(List<Student> studentList) {
-        // TODO
         Set<Integer> result = new HashSet<>();
-        Integer i = 0;
-        for (Student v : studentList) {
-            if (v.isIFM()) {
-                i = v.cps();
-                result.add(i);
-            }
-        }
+
+        studentList.stream()
+            .filter(Student::isIFM)
+            .map(Student::cps)
+            .forEach(result::add);
 
         return result;
     }
+
 
     /**
      * Task III: Random.
