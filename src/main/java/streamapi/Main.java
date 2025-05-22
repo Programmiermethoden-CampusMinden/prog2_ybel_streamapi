@@ -13,14 +13,14 @@ public class Main {
     public static void main(String... args) {
 
         // Task I: Students
-        System.out.println(
+        System.out.println( "insgesamt: " +
                 students(
                         List.of(
                                 new Student("A", 30, Enrollment.IFM),
                                 new Student("B", 45, Enrollment.IFM),
                                 new Student("C", 60, Enrollment.ELT),
                                 new Student("D", 45, Enrollment.ARCH),
-                                new Student("E", 80, Enrollment.IFM))));
+                                new Student("E", 80, Enrollment.IFM))) + " cps");
 
         // Task II: Set of ECTS of all IFM students
 
@@ -40,14 +40,12 @@ public class Main {
      */
     public static Integer students(List<Student> studentList) {
         // TODO
-        Integer sum = 0;
-        for (Student s : studentList) {
-            sum += s.cps();
-        }
+        int summe = studentList.stream()
+            .mapToInt(Student::cps)
+            .sum();
 
-        return sum;
+        return summe;
     }
-
     /**
      * Task II: Set of ECTS of all IFM students.
      *
