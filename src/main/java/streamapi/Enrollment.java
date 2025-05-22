@@ -7,5 +7,5 @@ public enum Enrollment {
     /** Electrical engineering. */
     ELT,
     /** Architecture. */
-    ARCH,
+    ARCH, MWI,
 }
