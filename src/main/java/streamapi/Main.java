@@ -2,6 +2,7 @@ package streamapi;
 
 import java.io.InputStream;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /** Starter for the stream api task. */
 public class Main {
@@ -65,14 +66,10 @@ public class Main {
             randomIntegers.add(r.nextInt(10));
         }
 
-        List<Integer> returnList = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            if (randomIntegers.get(i) % 2 == 0) {
-                returnList.add(randomIntegers.get(i) * randomIntegers.get(i));
-            }
-        }
-
-        return returnList;
+        return randomIntegers.stream()
+                                    .filter(c-> c % 2 == 0) // isEven
+                                    .map(a-> a * a) // a^2
+                                    .collect(Collectors.toList()); // Returns a List<Integer>
     }
 
     /**
