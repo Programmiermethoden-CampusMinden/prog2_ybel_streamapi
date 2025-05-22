@@ -53,16 +53,10 @@ public class Main {
      */
     public static Set<Integer> ifmCps(List<Student> studentList) {
         // TODO
-        Set<Integer> result = new HashSet<>();
-        Integer i = 0;
-        for (Student v : studentList) {
-            if (v.isIFM()) {
-                i = v.cps();
-                result.add(i);
-            }
-        }
-
-        return result;
+        return studentList.stream()
+            .filter(Student::isIFM) // nur IFM-Studierende
+            .map(Student::cps)      // auf ihre cps-Punkte abbilden
+            .collect(Collectors.toSet()); // in ein Set sammeln
     }
 
     /**
