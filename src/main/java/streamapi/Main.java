@@ -73,8 +73,12 @@ public class Main {
      * @return An open {@link InputStream} for the resource file
      */
     private static InputStream getResourceAsStream(String path) {
-        // TODO
-        throw new UnsupportedOperationException();
+        // ressource named 'path' is located in directory 'ressources'
+        final String ressourcePath = "streamapi/" + path;
+        // get 'ClassLoader' for this class ('Main') to access known class pathes,
+        // java searches for 'streamapi/path' in class pathes for class 'Main'
+        // ('ressources' directory is added as class path to class 'Main' by Gradle) 
+        return Main.class.getClassLoader().getResourceAsStream(ressourcePath);
     }
 
     /**
