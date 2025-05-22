@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.*;
+import java.util.stream.Stream;
 
 /** Starter for the stream api task. */
 public class Main {
@@ -92,31 +93,28 @@ public class Main {
      * @return String of all matching lines, separated by {@code "\n"}
      */
     public static String resources(String path) {
-        // TODO
-        StringBuilder result = new StringBuilder();
+        String result = "";
 
         try (InputStream stream = getResourceAsStream(path)) {
             BufferedReader r = new BufferedReader(new InputStreamReader(stream));
 
-            List<String> allLines = new ArrayList<>();
-
-            String newLine = r.readLine();
-            while (newLine != null) {
-                allLines.add(newLine);
-                newLine = r.readLine();
-            }
-
-            for (int i = 1; i < allLines.size(); i++) {
-                String s = allLines.get(i);
-                if (s.startsWith("a") && !(s.length() < 2)) {
-                    result.append(allLines.get(i)).append("\n");
-                }
-            }
-
+            // return lines concatinated and '\n'-separated only including lines starting with 'a' and min. length of 1:
+            // '.lines()'                           -> create 'Stream' of lines from 'BufferedReader'
+            // '.filter(s -> s.startsWith("a"))'    -> filter to only get lines starting with 'a'
+            // '.filter(s -> !(s.length() < 2))'    -> filter to only get lines with min. length of 1
+            // '.map(s -> (s + "\n"))'              -> append '\n' to end of each (remaining) line
+            // '.reduce("", String::concat)'        -> turn 'Stream' of 'Strings' into single 'String' using
+            //                                         referenced method 'String.concat()' to concatinating the lines
+            result = r
+                .lines()
+                .filter(s -> s.startsWith("a"))
+                .filter(s -> !(s.length() < 2))
+                .map(s -> (s + "\n"))
+                .reduce("", String::concat);
         } catch (IOException e) {
             System.err.println("Ouch, that didn't work: \n" + e.getMessage());
         }
 
-        return result.toString();
+        return result;
     }
 }
