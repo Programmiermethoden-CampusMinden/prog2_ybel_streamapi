@@ -51,9 +51,10 @@ public class Main {
     /**
      * Task III: Random.
      *
-     * <p>Calculate ten random integers between 0 and 10.
+     * <p>Calculate ten random integers between 0 and 10. Remove all odd numbers and collect the
+     * squares of the remaining even integers in a list.
      *
-     * @return List of ten random integers (between 0 and 10)
+     * @return List with 0 to 10 entries containing the processed random even integers
      */
     public static List<Integer> random() {
         // TODO
